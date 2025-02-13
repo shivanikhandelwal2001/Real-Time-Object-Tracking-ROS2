@@ -4,3 +4,5 @@
 /log
 /dev_ws
 /.colcon/
+__pycache__
+media

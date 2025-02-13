@@ -1,0 +1,6 @@
+# ROS2 build, install, log, and dependencies
+/build
+/install
+/log
+/dev_ws
+/.colcon/

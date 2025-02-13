@@ -155,5 +155,8 @@ Here are some helpful resources related to using **WSL2**, **USB support in WSL2
 Contributions are welcome! Please fork the repository and create a pull request.
 
 ## **👩‍💻 Author**
-Developed by Shivani Khandelwal
+Developed by Shivani Khandelwal.
+
+Connect with me here - [Profile](https://linktr.ee/shivanikhandelwal)
+
 For questions or improvements, feel free to reach out at [shivanikhandelwal487@gmail.com](mailto:shivanikhandelwal487@gmail.com).

@@ -12,7 +12,7 @@ using json = nlohmann::json;
 
 class CentroidTracker {
 public:
-    CentroidTracker(int max_disappeared = 70, double dist_thresh = 50.0)
+    CentroidTracker(int max_disappeared, double dist_thresh)
         : max_disappeared_(max_disappeared), dist_thresh_(dist_thresh), next_object_id_(0) {}
 
     std::unordered_map<int, Eigen::Vector2d> update(const std::vector<std::vector<int>>& detections) {
@@ -106,7 +106,16 @@ private:
 
 class TrackingNode : public rclcpp::Node {
 public:
-    TrackingNode() : Node("object_tracking"), tracker_() {
+    TrackingNode() : Node("object_tracking") {
+
+        this->declare_parameter<int>("max_disappeared", 50);
+        this->declare_parameter<double>("dist_thresh", 50.0);
+
+        int max_disappeared = this->get_parameter("max_disappeared").as_int();
+        double dist_thresh = this->get_parameter("dist_thresh").as_double();
+        
+        tracker_ = CentroidTracker(max_disappeared, dist_thresh);
+
         detection_sub_ = this->create_subscription<std_msgs::msg::String>(
             "/object_detection", 10, std::bind(&TrackingNode::detection_callback, this, std::placeholders::_1));
 
@@ -139,7 +148,6 @@ private:
 
     rclcpp::Subscription<std_msgs::msg::String>::SharedPtr detection_sub_;
     rclcpp::Publisher<std_msgs::msg::String>::SharedPtr tracking_pub_;
-    CentroidTracker tracker_;
 };
 
 

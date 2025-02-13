@@ -2,3 +2,8 @@ image_publisher:
   ros__parameters:
     camera: false  # true = live camera, false = video file
     video_name: "test1.mp4"
+
+object_tracking:
+  ros__parameters:
+    max_disappeared: 50  # Maximum frames before object is removed
+    dist_thresh: 50.0     # Distance threshold for tracking

@@ -1,0 +1,4 @@
+image_publisher:
+  ros__parameters:
+    camera: false  # true = live camera, false = video file
+    video_name: "test1.mp4"

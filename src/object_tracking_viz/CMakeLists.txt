@@ -45,9 +45,15 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
-# install launch 
+# add launch 
 install (DIRECTORY
   launch
+  DESTINATION share/${PROJECT_NAME}
+)
+
+# add config 
+install (DIRECTORY
+  config
   DESTINATION share/${PROJECT_NAME}
 )
 

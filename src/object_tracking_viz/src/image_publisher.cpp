@@ -3,19 +3,33 @@
 #include <cv_bridge/cv_bridge.h>
 #include <opencv2/opencv.hpp>
 
+std::string package_path = "/home/shivani/ros2_ws/src/object_tracking_viz";
+
 
 class ImageNode : public rclcpp::Node {
 public:
     ImageNode() : Node("image_publisher"), img_count_(0) {
         RCLCPP_INFO(this->get_logger(), "Publishing Images...");
+
+        this->declare_parameter<bool>("camera", true);
+        this->declare_parameter<std::string>("video_name", "test1.mp4");
         
-        std::string video_path = "/home/shivani/ros2_ws/src/object_tracking_viz/media/test1.mp4";
-        camera_.open(0, cv::CAP_V4L2);
-        // camera_.open(video_path);
-        if (!camera_.isOpened()) {
-            RCLCPP_ERROR(this->get_logger(), "Failed to open camera");
-            rclcpp::shutdown();
-            return;
+        bool camera = this->get_parameter("camera").as_bool();
+        std::string video_name = this->get_parameter("video_name").as_string();
+        std::string video_path = package_path + "/media/" + video_name;
+
+        if (camera) {
+            RCLCPP_INFO(this->get_logger(), "Using live camera");
+            camera_.open(0, cv::CAP_V4L2);
+            
+            if (!camera_.isOpened()) {
+                RCLCPP_ERROR(this->get_logger(), "Failed to open camera");
+                rclcpp::shutdown();
+                return;
+            }
+        } else {
+            RCLCPP_INFO(this->get_logger(), "Using video file: %s", video_path.c_str());
+            camera_.open(video_path);
         }
 
         camera_.set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));

@@ -56,7 +56,7 @@ class ObjectTracking(Node):
         self.subscription = self.create_subscription(String, '/object_tracking', self.tracking_callback, 10)
         self.result_pub = self.create_publisher(Image, '/visualization/image', 10)
         self.br = CvBridge()
-        
+
         self.shared_data = shared_data
         self.lock = lock
 
@@ -110,13 +110,25 @@ class ObjectTracking(Node):
 
     def display_images(self):
         """ Continuously displays images without blocking ROS execution """
+        output_path = "output.avi"
+        fps = 60
+        video_writer = None
+
         while True:
             with self.lock:
                 frame = self.shared_data.get("visualized_frame", None)
 
             if frame is not None:
+                if video_writer is None:
+                    frame_size = (frame.shape[1], frame.shape[0])
+                    video_writer = cv2.VideoWriter(output_path, cv2.VideoWriter_fourcc(*'XVID'), fps, frame_size)
+
                 cv2.imshow("Visualization", frame)
                 cv2.waitKey(1)  # Keep the window active
+                video_writer.write(frame)
+
+        if video_writer:
+            video_writer.release()
 
 
 def main(args=None):

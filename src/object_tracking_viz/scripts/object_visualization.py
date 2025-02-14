@@ -26,7 +26,7 @@ class ImageSubscriber(Node):
         frame = self.br.imgmsg_to_cv2(data, "bgr8")
         with self.lock:
             self.shared_data["frame"] = frame
-        self.get_logger().info("Updated frame.")  # Logging to confirm updates
+        self.get_logger().info("Updated frame.")
 
 
 class ObjectDetection(Node):
@@ -52,10 +52,11 @@ class ObjectTracking(Node):
 
     def __init__(self, shared_data, lock):
         super().__init__('object_tracking_subscriber')
-        self.subscription = self.create_subscription(
-            String, '/object_tracking', self.tracking_callback, 10)
+
+        self.subscription = self.create_subscription(String, '/object_tracking', self.tracking_callback, 10)
         self.result_pub = self.create_publisher(Image, '/visualization/image', 10)
         self.br = CvBridge()
+        
         self.shared_data = shared_data
         self.lock = lock
 

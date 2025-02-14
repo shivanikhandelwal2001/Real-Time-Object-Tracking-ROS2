@@ -6,11 +6,13 @@
 std::string package_path = "/home/shivani/ros2_ws/src/object_tracking_viz";
 
 
+// ROS2 Node for capturing and publishing images
 class ImageNode : public rclcpp::Node {
 public:
     ImageNode() : Node("image_publisher"), img_count_(0) {
         RCLCPP_INFO(this->get_logger(), "Publishing Images...");
 
+        // Declare ROS2 parameters for selecting camera or video file
         this->declare_parameter<bool>("camera", true);
         this->declare_parameter<std::string>("video_name", "test1.mp4");
         
@@ -18,6 +20,7 @@ public:
         std::string video_name = this->get_parameter("video_name").as_string();
         std::string video_path = package_path + "/media/" + video_name;
 
+        // Open video stream based on the parameter
         if (camera) {
             RCLCPP_INFO(this->get_logger(), "Using live camera");
             camera_.open(0, cv::CAP_V4L2);
@@ -40,11 +43,14 @@ public:
     }
 
 private:
+    // Callback function that read and publishes images in ROS2 format
     void timer_callback() {
         cv::Mat frame;
         if (camera_.read(frame)) {
+            // Resize the frame
             cv::resize(frame, frame, cv::Size(820, 620), 0, 0, cv::INTER_CUBIC);
             
+            // Convert OpenCV image to ROS2 Image message format
             auto img_msg = cv_bridge::CvImage(std_msgs::msg::Header(), "bgr8", frame).toImageMsg();
             img_pub_->publish(*img_msg);
             RCLCPP_INFO(this->get_logger(), "Published image %d", img_count_++);
@@ -58,6 +64,7 @@ private:
 };
 
 
+// Main function to initialize and run the ROS2 node
 int main(int argc, char **argv) {
     rclcpp::init(argc, argv);
     auto node = std::make_shared<ImageNode>();

@@ -126,7 +126,13 @@ ros2 run object_tracking_viz object_visualization
 
 ## **RQT Graph**
 Below is the **rqt_graph** showing the ROS2 nodes and their connections.
+
 ![ROS 2 Node Graph](rqt_graph.png)
+
+---
+
+## **Demo**
+![Demo Video](output.avi)
 
 ---
 

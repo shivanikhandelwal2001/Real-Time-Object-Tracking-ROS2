@@ -124,6 +124,12 @@ ros2 run object_tracking_viz object_visualization
 
 ---
 
+## **RQT Graph**
+Below is the **rqt_graph** showing the ROS2 nodes and their connections.
+![ROS 2 Node Graph](rqt_graph.png)
+
+---
+
 ## **Resources & References**
 Here are some helpful resources related to using **WSL2**, **USB support in WSL2**, **Gazebo Simulation**, and **OpenCV VideoIO**:
 
@@ -160,3 +166,5 @@ Developed by Shivani Khandelwal.
 Connect with me here - [Profile](https://linktr.ee/shivanikhandelwal)
 
 For questions or improvements, feel free to reach out at [shivanikhandelwal487@gmail.com](mailto:shivanikhandelwal487@gmail.com).
+
+---

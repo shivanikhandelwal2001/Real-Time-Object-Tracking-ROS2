@@ -132,7 +132,7 @@ Below is the **rqt_graph** showing the ROS2 nodes and their connections.
 ---
 
 ## **Demo**
-![Demo Video](output.avi)
+![Demo Video](output.mp4)
 
 ---
 

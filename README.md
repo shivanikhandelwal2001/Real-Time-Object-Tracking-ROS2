@@ -141,6 +141,8 @@ Here are some helpful resources related to using **WSL2**, **USB support in WSL2
 
 ### ROS2:
 - [ROS2 Documentation](https://docs.ros.org/en/humble/index.html)
+- [Understand ROS2](https://youtu.be/VNRW9i1qJZw)
+- [ROS2 Resources](https://youtu.be/GHb6Wr_exxI)
 - [ROS2 Tutorials](https://youtube.com/playlist?list=PLLSegLrePWgJudpPUof4-nVFHGkB62Izy&si=sx0AHXzXGNbZhxi1)
 - [Camera usage in ROS2](https://youtu.be/6e94ZnYnO_U)
 

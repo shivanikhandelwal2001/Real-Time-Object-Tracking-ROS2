@@ -34,7 +34,7 @@ This project consists of the following ROS2 nodes:
 
 ``` bash
 
-ros2_ws/src/
+Real-Time-Object-Tracking-ROS2/src/
 │── object_tracking_viz/
 │   ├── config/                         # YAML configuration files
 │   │   ├── params.yaml                 # ROS2 parameters (camera, video file, tracking settings)

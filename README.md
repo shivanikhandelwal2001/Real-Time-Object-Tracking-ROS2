@@ -98,7 +98,7 @@ pip install opencv-python numpy ultralytics nlohmann-json
 ## **Build the Package**
 
 ``` bash
-cd ~/ros2_ws
+cd ~/Real-Time-Object-Tracking-ROS2
 colcon build --packages-select object_tracking_viz
 source install/setup.bash
 ```
